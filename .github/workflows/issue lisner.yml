@@ -1,0 +1,12 @@
+name: Issue Listener
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print Issue Information
+        run: echo "${{ toJSON(github) }}"
