@@ -1,0 +1,35 @@
+name: deploy action test
+on: push
+jobs:
+  test-job:
+    runs-on: ubuntu-latest
+    steps:
+        - name: Get code
+          uses: actions/Checkout@v4
+        - name: install NodeJs
+          uses: actions/setup-node@v3
+          with:
+            node-version: 18
+        - name: Install dependency
+          run: npm ci
+        - name: run test
+          run: npm test
+        - name: run lint
+          run: npm lint
+  delpoy:
+    needs: test-job
+    runs-on: ubuntu-latest
+    steps:
+        - name: Get code
+          uses: actions/Checkout@v4
+        - name: install NodeJs
+          uses: actions/setup-node@v3
+          with:
+            node-version: 18
+        - name: Install dependency
+          run: npm ci
+        - name: build project
+          run: npm run build
+        - name: deploy
+          run: echo "deploy done"   
+
